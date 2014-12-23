@@ -29,10 +29,10 @@ angular.module('sritry1App')
         if(playerScore === 21 && dealerScore === 21){
           return 0;
           } //tie
-        else if(playerScore === 21 || dealerScore > 21 || ( (playerScore > dealerScore) && ((playerScore < 21) && (dealerScore < 21) ))){
+        else if( (playerScore === 21) || (dealerScore > 21) || ( (playerScore > dealerScore) && ((playerScore < 21) && (dealerScore < 21) && (dealerScore > 16)  ))){
           return 1; //player won
         }
-        else if(  (dealerScore === 21) || (playerScore > 21)  || (( (playerScore < dealerScore) && ((playerScore < 21) && (dealerScore < 21) )) )){
+        else if(  (dealerScore === 21) || (playerScore > 21)) {     
           return 2; //dealer won
         }
         else{
@@ -41,10 +41,10 @@ angular.module('sritry1App')
       }, 
       alertStatus: function(gameState){
         if(gameState === 0){
-          swal('Its a tie!', 'The game is in Push', 'warning');
+          swal({title:'Its a tie!', text:'The game is in Push', type:'warning', confirmButtonText: "Cool"});
         }
         else if (gameState === 1){
-          swal('Player won!', 'You won!', "success");
+          swal({title:'Player won!', text:'You won!', type:"success",confirmButtonText: "Cool"} );
         }
         else if (gameState === 2){
           swal('Dealer won!', 'Dealer won!', 'info');
@@ -53,36 +53,8 @@ angular.module('sritry1App')
           swal('some went wrong', 'oops', 'error');
         }
 
-      },
-      dealersTurn: function(gameState){
-        var dealerScore = gameState.dealer.Score;
-
-        if(dealerScore < 17)
-        {
-          //if dealer has less than 17, he must hit
-
-          mvGame.DealSingleCard(gameState.dealer);
-          //bust, ,blackjack or stay
-          dealerScore = gameState.dealer.Score;
-          if(dealerScore > 21)
-          {
-            //you won!
-            swal("Player won!", "Dealer busted!", "success");
-            return 1;
-          }
-          else if(dealerScore === 21){
-            //dealerbackjack
-            swal("Dealer won!", "Dealer balackjack!", "success");
-            return 2;
-          }
-          else {
-            return -1; //game continues
-          }
-
-        }
-
-
       }
+
 
 
     };

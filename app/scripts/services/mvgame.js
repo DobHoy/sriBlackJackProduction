@@ -28,34 +28,28 @@ angular.module('sritry1App')
         this.DealSingleCard(playerState);
       }, 
       gameStart: function(gameState){
-        // console.log('i got called');
+        console.log('i got called');
 
-        // $(".playing-card").remove();
+        $(".playing-card").remove();
           
 
 
-        //   gameState.playerReady = true;
-        //   gameState.gameinProgress = true;
+          gameState.playerReady = true;
+          gameState.gameinProgress = true;
 
-        //   gameState.player = {Score:0, Cards:[]};
-        //   gameState.dealer = {Score:0, Cards:[]};
+          gameState.player = {Score:0, Cards:[]};
+          gameState.dealer = {Score:0, Cards:[]};
           
       }, 
       isGameOver: function(gameState){
         var statusOfGame = mvDealer.checkGameStateBJ(gameState);
 
 
-
-            if (statusOfGame >= 0 )
-            {
-              mvDealer.alertStatus(statusOfGame);
-              // $scope.gameStart();
-              this.gameStart(gameState);
-            }
             return statusOfGame;
       }, 
       dealersTurn: function(gameState){
         var dealerScore = gameState.dealer.Score;
+        var playerScore = gameState.player.Score;
 
         if(dealerScore < 17)
         {
@@ -75,6 +69,12 @@ angular.module('sritry1App')
             swal("Dealer won!", "Dealer balackjack!", "success");
             return 2;
           }
+          else if( (dealerScore > 16) && (playerScore > dealerScore) && (playerScore < 21) ){
+            //dealerbackjack
+            swal("Player won!", "You have more than dealer", "success");
+            return 1;
+          }
+
           else {
             return -1; //game continues
           }

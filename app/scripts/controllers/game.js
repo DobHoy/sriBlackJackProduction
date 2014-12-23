@@ -13,32 +13,82 @@ angular.module('sritry1App')
     $scope.playerReady = false;
     $scope.gameinProgress = false;
 
+
+    $scope.canRestart = false;
+    $scope.canHitOrStay = false;
+//canRestart = false
+//canDeal = false
+
+    $scope.player = {Score:0, Cards:[]};
+    $scope.dealer = {Score:0, Cards:[]};
+
     console.log("the thing is " + $scope.playerReady);
     
 
     // $scope.gameStart = mvGame.gameStart($scope);
 
+    $scope.finishGame = function(gameState){
+
+          if (gameState >= 0 )
+          {
+            mvDealer.alertStatus(gameState);
+            $scope.canRestart = true;
+            // $scope.gameStart();
+
+          }
+
+
+    }
+
     $scope.gameStart = function(){
       $scope.playerReady = true;
       $scope.gameinProgress = true;
+      $scope.canRestart = false;
       console.log('i got called');
 
-        $(".playing-card").remove();
+        
           
 
 
-          $scope.player = {Score:0, Cards:[]};
-          $scope.dealer = {Score:0, Cards:[]};
+          // $scope.player = {Score:0, Cards:[]};
+          // $scope.dealer = {Score:0, Cards:[]};
+          // $(".playing-card").remove();
+          
 
     };
 
+    $scope.reStart = function(){
+
+        $scope.player = {Score:0, Cards:[]};
+          $scope.dealer = {Score:0, Cards:[]};
+          $(".playing-card").remove();
+          $scope.gameStart();
+    }
+
     $scope.deal = function(){
       
+      $scope.gameStart();
+
       mvGame.Deal($scope.player);
 
       mvGame.Deal($scope.dealer);
 
-      mvGame.isGameOver($scope);
+      
+
+      var gameState = mvGame.isGameOver($scope);
+
+
+      // var gameState = mvDealer.checkGameStateBJ($scope);
+
+
+      $scope.finishGame(gameState);
+      // if (gameState >= 0 )
+      // {
+      //   mvDealer.alertStatus(gameState);
+      //   $scope.gameStart();
+
+      // }
+
 
                   // if (statusOfGame >= 0 )
             // {
@@ -73,20 +123,31 @@ angular.module('sritry1App')
     $scope.hit = function(){
       
       mvGame.DealSingleCard($scope.player);
-      mvGame.isGameOver($scope);
-
-      //dealers turn
-      var gameState = mvDealer.dealersTurn($scope);
-
-
-      // var gameState = mvDealer.checkGameStateBJ($scope);
-
+      var gameState = mvGame.isGameOver($scope);
 
 
       if (gameState >= 0 )
       {
+        $scope.canRestart = true;
         mvDealer.alertStatus(gameState);
-        $scope.gameStart();
+        // $scope.gameStart();
+      }
+      else{
+
+
+          //dealers turn
+           gameState = mvGame.dealersTurn($scope);
+           $scope.finishGame(gameState);
+
+          // var gameState = mvDealer.checkGameStateBJ($scope);
+
+
+
+          // if (gameState >= 0 )
+          // {
+          //   mvDealer.alertStatus(gameState);
+          //   $scope.gameStart();
+          // }
       }
 
       // //dealer turn
@@ -108,17 +169,17 @@ angular.module('sritry1App')
  
       //dealer stack
       var gameState = mvGame.dealersTurn($scope);
-
+      $scope.finishGame(gameState);
 
       // var gameState = mvDealer.checkGameStateBJ($scope);
 
 
 
-      if (gameState >= 0 )
-      {
-        mvDealer.alertStatus(gameState);
-        $scope.gameStart();
-      }
+      // if (gameState >= 0 )
+      // {
+      //   mvDealer.alertStatus(gameState);
+      //   $scope.gameStart();
+      // }
 
     };
 
@@ -135,3 +196,12 @@ angular.module('sritry1App')
 //some game logic 
 // 
 
+//when dealing I can't press hit, stay or restart
+//hit stay , can't deal
+//restart, all 3 buttons disabled
+//when b1 on , restartDisabled
+
+//canRestart = false
+//canDeal = false
+
+//move it all to another function

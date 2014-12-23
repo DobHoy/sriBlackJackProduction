@@ -24,7 +24,7 @@
         <button type="submit" class="btn btn-success" ng-click="stay()">Stay</button>
 
         <label>Player Cards</label>
-        <button class="btn btn-warning" ng-click="gameStart()">restart</button>
+        <button class="btn btn-warning" ng-click="reStart()" ng-show="canRestart">restart</button>
         <h1 ng-show="gameinProgress">Your score is {{player.Score}}</h1>
         <div >
           <playing-card id="card" suit="{{card.suit}}" rank="{{card.rank}}"  ng-repeat="card in player.Cards"/>
