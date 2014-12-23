@@ -33,7 +33,6 @@ angular.module('sritry1App')
         $(".playing-card").remove();
           
 
-
           gameState.playerReady = true;
           gameState.gameinProgress = true;
 

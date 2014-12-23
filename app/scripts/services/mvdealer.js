@@ -11,13 +11,8 @@ angular.module('sritry1App')
   .factory('mvDealer', function () {
 
 
-    
 
-
-    // Public API here
     return {
-
-
 
 
 
@@ -54,7 +49,6 @@ angular.module('sritry1App')
         }
 
       }
-
 
 
     };

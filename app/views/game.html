@@ -12,17 +12,18 @@
 
 </form>
 
-
+<!-- || !canRestart -->
 <div class="container" ng-show="gameinProgress">
   <div class="container" >
     <div class="jumbotron">
 
         <label ng-show="playerReady">Welcome {{playerName}}!</label>
 
-        <button type="submit" class="btn btn-info" ng-click="deal()">Deal</button>
-        <button type="submit" class="btn btn-warning" ng-click="hit()">Hit</button>
-        <button type="submit" class="btn btn-success" ng-click="stay()">Stay</button>
-
+        <div ng-hide="canRestart">
+          <button type="submit" class="btn btn-info" ng-click="deal()" ng-hide="canHitOrStay">Deal</button>
+          <button type="submit" class="btn btn-warning" ng-click="hit()" ng-show="canHitOrStay">Hit</button>
+          <button type="submit" class="btn btn-success" ng-click="stay()" ng-show="canHitOrStay">Stay</button>
+        </div>
         <label>Player Cards</label>
         <button class="btn btn-warning" ng-click="reStart()" ng-show="canRestart">restart</button>
         <h1 ng-show="gameinProgress">Your score is {{player.Score}}</h1>
