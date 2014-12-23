@@ -11,11 +11,7 @@ angular.module('sritry1App')
   .factory('mvDealer', function () {
 
 
-
     return {
-
-
-
       checkGameStateBJ: function(gameState){
 
         var playerScore = gameState.player.Score;
@@ -36,13 +32,13 @@ angular.module('sritry1App')
       }, 
       alertStatus: function(gameState){
         if(gameState === 0){
-          swal({title:'Its a tie!', text:'The game is in Push', type:'warning', confirmButtonText: "Cool"});
+          swal({title:'Its a tie!', text:'The game is in Push', type:'warning', confirmButtonText: "Ok"});
         }
         else if (gameState === 1){
-          swal({title:'Player won!', text:'You won!', type:"success",confirmButtonText: "Cool"} );
+          swal({title:'Player won!', text:'Congrats!', type:"success",confirmButtonText: "Ok"} );
         }
         else if (gameState === 2){
-          swal('Dealer won!', 'Dealer won!', 'info');
+          swal('Dealer won!', 'Dealer won!', 'warning');
         }
         else{
           swal('some went wrong', 'oops', 'error');
@@ -50,8 +46,6 @@ angular.module('sritry1App')
 
       }
 
-
     };
-
 
   });

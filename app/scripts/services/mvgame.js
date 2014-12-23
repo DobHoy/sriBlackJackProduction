@@ -27,24 +27,9 @@ angular.module('sritry1App')
         this.DealSingleCard(playerState);
         this.DealSingleCard(playerState);
       }, 
-      gameStart: function(gameState){
-        console.log('i got called');
-
-        $(".playing-card").remove();
-          
-
-          gameState.playerReady = true;
-          gameState.gameinProgress = true;
-
-          gameState.player = {Score:0, Cards:[]};
-          gameState.dealer = {Score:0, Cards:[]};
-          
-      }, 
       isGameOver: function(gameState){
         var statusOfGame = mvDealer.checkGameStateBJ(gameState);
-
-
-            return statusOfGame;
+        return statusOfGame;
       }, 
       dealersTurn: function(gameState){
         var dealerScore = gameState.dealer.Score;
@@ -73,18 +58,13 @@ angular.module('sritry1App')
             swal("Player won!", "You have more than dealer", "success");
             return 1;
           }
-
           else {
             return -1; //game continues
           }
 
         }
 
-
       }
-
-
-
 
     };
   });

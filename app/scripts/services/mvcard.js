@@ -27,7 +27,6 @@ angular.module('sritry1App')
             });
         });
 
-
     return {
       giveRandomCard: function () {
         var randomSuit = suits[lodash.random(suits.length - 1)];
